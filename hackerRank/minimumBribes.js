@@ -14,7 +14,7 @@ function minimumBribes(q) {
 
     //Check the number of bribes each has taken.
     //this is obtained by checking the number of people ahead of each whose number is larger 
-    //than it.
+    //than it. Nawao
     for(let j= q[i]-2; j<i; j++){
       if(q[j] > q[i]){
         numberOfBribes++
