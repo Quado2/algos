@@ -1,107 +1,178 @@
 class Node {
-   constructor(data, next=null){
-      this.data = data;
-      this.next = next;
-   }
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
 }
 
 class LinkedList {
-   constructor(){
-      this.head = null;
-      this.size = 0;
-   }
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
 
- 
+  //insert first node
+  insertFirst(data) {
+    this.head = new Node(data, this.head);
+    this.size++;
+  }
 
-   //insert first node
-   insertFirst (data){
-      this.head = new Node(data, this.head);
-      this.size++;
-   }
+  //insert last node
+  insertLast(data) {
+    let node = new Node(data);
+    let current;
 
-   //insert last node
-   insertLast(data){
-      let node = new Node(data);
-      let current;
+    //if empty, make the head;
 
-      //if empty, make the head;
-
-      if(!this.head){
-         this.head = node;
-      } else{
-         current = this.head;
-         while(current.next){
-            current = current.next;
-         }
-         current.next = node;
-      }
-
-      this.size++
-   }
-
-   //insert at index;
-   insertAt(index,data){
-      if(index > 0 && index > this.size || index < 0) return {success: false, errorMessage:"Index is out range"};
-
-      if(index ===0) {
-         this.insertFirst(data);
-         return {success: true, errorMessage: null}
-      }
-
-      const node = new Node(data);
-      let current, previous
-
+    if (!this.head) {
+      this.head = node;
+    } else {
       current = this.head;
-      let count = 0;
-
-      while(count < index){
-         previous = current;
-         current = current.next;
-         count ++
+      while (current.next) {
+        current = current.next;
       }
-      node.next = current;
-      previous.next = node;
-      this.size ++;
-      return {success: true, errorMessage: null};
+      current.next = node;
+    }
 
-   }
+    this.size++;
+  }
 
-   //get data at
-   getAt(index){
-      let current = this.head;
-      let  count = 0;
+  //insert at index;
+  insertAt(index, data) {
+    if ((index > 0 && index > this.size) || index < 0)
+      return { success: false, errorMessage: "Index is out range" };
 
+    if (index === 0) {
+      this.insertFirst(data);
+      return { success: true, errorMessage: null };
+    }
 
-      while(current){
-         if(count == index){
-            return current.data
-         }
+    const node = new Node(data);
+    let current, previous;
 
-         count++;
-         current = current.next;
+    current = this.head;
+    let count = 0;
+
+    while (count < index) {
+      previous = current;
+      current = current.next;
+      count++;
+    }
+    node.next = current;
+    previous.next = node;
+    this.size++;
+    return { success: true, errorMessage: null };
+  }
+
+  //get data at
+  getAt(index) {
+    let current = this.head;
+    let count = 0;
+    if (index < 0) {
+      return { success: false, errorMessage: "Cannot index negative values" };
+    }
+
+    while (current) {
+      if (count == index) {
+        return current.data;
       }
 
-      return null
-   };
+      count++;
+      current = current.next;
+    }
 
+    return null;
+  }
 
+  //remove at
+  removeAt(index) {
+    if ((index > 0 && index > this.size) || index < 0)
+      return { success: false, errorMessage: "Index is out range" };
 
-   //print list data
-   printListData(){
-      let current = this.head;
+    let current = this.head;
+    let previous;
 
-      while(current){
-         console.log(current.data);
-         current  = current.next;
-      }
-   }
+    if (index === 0) {
+      this.head = current.next;
+      return { success: true, errorMessage: null };
+    }
+
+    let count = 0;
+    while (count < index) {
+      previous = current;
+      current = current.next;
+      count++;
+    }
+    previous.next = current.next;
+    return { success: true, errorMessage: null };
+  }
+
+  //print list data
+  printListData() {
+    let current = this.head;
+
+    while (current) {
+      console.log(current.data);
+      current = current.next;
+    }
+  }
+
+  //clear list
+  clearList() {
+    this.head = null;
+    this.size = 0;
+  }
 }
 
 const ll = new LinkedList();
 ll.insertFirst(100);
 ll.insertFirst(200);
-ll.insertFirst("The first one")
+ll.insertFirst("The first one");
 ll.insertAt(0, 400);
-console.log(ll.getAt(0));
+//console.log(ll.head.data);
 
-// ll.printListData()
+class NewLinked {
+  constructor() {
+    this.data = null;
+    this.next = null;
+    this.size = 0;
+  }
+
+  insertLast(data) {
+    let node = new Node(data);
+    if (!this.data) {
+      this.data = data;
+      this.size++;
+      return;
+    }
+    if (this.size === 1) {
+      this.next = node;
+      this.size++
+    } else {
+       let current = this.next;
+       while(current.next){
+          current = current.next
+       }
+       current.next = node;
+       this.size++
+    }
+  }
+
+  insertFirst(data) {
+    if (!this.data) {
+      this.data = data;
+    } else {
+      this.next = new Node(data);
+    }
+  }
+}
+
+const nl = new NewLinked();
+
+//console.log(nl);
+
+console.log(6 > "adf".value);
+
+
+
+
