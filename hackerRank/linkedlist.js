@@ -66,7 +66,24 @@ class LinkedList {
 
    }
 
-   //Remove at 
+   //get data at
+   getAt(index){
+      let current = this.head;
+      let  count = 0;
+
+
+      while(current){
+         if(count == index){
+            return current.data
+         }
+
+         count++;
+         current = current.next;
+      }
+
+      return null
+   };
+
 
 
    //print list data
@@ -85,6 +102,6 @@ ll.insertFirst(100);
 ll.insertFirst(200);
 ll.insertFirst("The first one")
 ll.insertAt(0, 400);
-console.log(ll.insertAt(-1,"big rang"));
+console.log(ll.getAt(0));
 
-ll.printListData()
+// ll.printListData()
