@@ -11,7 +11,6 @@ function isBallanced(s){
   for(let i = 0; i<arr.length; i++){
     if(arr[i] === ")"){
       if(arr[i-1] !="("){
-        console.log("about to say no for (:", arr)
         return "NO"
       }else{
         arr.splice(i-1,2);
@@ -21,7 +20,6 @@ function isBallanced(s){
 
     else if(arr[i] === "]"){
       if(arr[i-1] !="["){
-        console.log("about to say no for [:", arr)
         return "NO"
       }else{
         arr.splice(i-1,2);
@@ -31,7 +29,6 @@ function isBallanced(s){
 
     else if(arr[i] === "}"){
       if(arr[i-1] !="{"){
-        console.log("about to say no for {:", arr)
         return "NO"
       }else{
         arr.splice(i-1,2);
@@ -40,10 +37,12 @@ function isBallanced(s){
     }
 
   }
-
-  return "YES"
+if(arr.length >= 1) return "NO"
+return "YES"
 }
-let arr2 = "{[([{}])]]}";
-console.log(isBallanced(arr2));
+
+
+isBallanced(test2)
+
 
 
