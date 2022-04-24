@@ -1,2 +1,3 @@
-const person = require("./test.js")
-console.log(person);
+const x = 6%2;
+const y = x? "ONe":"two";
+console.log(y)
