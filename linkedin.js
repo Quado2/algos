@@ -18,10 +18,10 @@ const myBoundMethod = (function(i){
 
 
 //ANONYMOUS FUNCTION 
-const person = "Ebuka";
-(function(i){
-  console.log(i);
-})("Chidi");
+// const person = "Ebuka";
+// (function(i){
+//   console.log(i);
+// })("Chidi");
 
 // for(let i= 0; i<5; i++){
 //   setTimeout(()=>{
@@ -45,11 +45,28 @@ const person = "Ebuka";
 //   }, 1000*j);
 // }
 
-var king = "Okoro"
-if(true){
-  var king = "Eze";
+
+//Function scoped var
+// var king = "Okoro"
+// if(true){
+//   var king = "Eze";
+// }
+
+// console.log(king)
+
+const F = function (){
+  this.a = 1;
+  this.b = 2;
+
 }
 
-console.log(king)
+const o = new F();
+
+F.prototype.b = 3;
+F.prototype.c = 4;
+
+
+console.log(o.b);
+console.log(o.__proto__.b);
 
 
