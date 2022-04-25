@@ -156,3 +156,16 @@ const myBoundMethod = (function(i){
 //   let z = 7;
 // }
 // console.log(x + y + z);
+
+// let scores = [];
+// scores.push(1,2);
+
+// console.log( scores)
+
+function pointValues(point){
+  const {name, age} = {...point};
+
+  console.log(name, age);
+}
+
+pointValues({name: "Chikwado", age:43})
