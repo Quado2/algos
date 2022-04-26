@@ -1,14 +1,15 @@
-function getAllIndexes(val, arr) {
-  var indexes = [],
-    i = -1;
-  while ((i = arr.indexOf(val, i + 1)) != -1) {
-    indexes.push(i);
-  }
-  return indexes;
-}
-
 var shovelChange = function (bills) {
   // implement function here
+
+  function getAllIndexes(val, arr) {
+    var indexes = [],
+      i = -1;
+    while ((i = arr.indexOf(val, i + 1)) != -1) {
+      indexes.push(i);
+    }
+    return indexes;
+  }
+
   let wallet = [];
   for (let i = 0; i < bills.length; i++) {
     switch (bills[i]) {
@@ -31,12 +32,19 @@ var shovelChange = function (bills) {
       case 20: {
         let all5 = getAllIndexes(5, wallet);
         let all10 = getAllIndexes(10, wallet);
-        if (all5.length === 0 || all10.length === 0) {
+
+        if (all10.length >= 1 && all5.length >= 1) {
+          wallet.splice(all5[0], 1);
+          wallet.splice(all10[0], 1);
+          wallet.push(20);
+        } else if (all5.length >= 3) {
+          for (let i = 0; i < 3; i++) {
+            wallet.splice(all5[i], 1);
+          }
+        } else {
           return false;
         }
-        wallet.splice(all5[0], 1);
-        wallet.splice(all10[0], 1);
-        wallet.push(20);
+
         break;
       }
 
@@ -84,7 +92,7 @@ var shovelChange = function (bills) {
           }
           wallet.splice(all10[0], 1);
           wallet.push(50);
-        } else if (all5.lenght >= 9) {
+        } else if (all5.length >= 9) {
           for (let i = 0; i < 9; i++) {
             wallet.splice(all5[i], 1);
           }
@@ -101,6 +109,6 @@ var shovelChange = function (bills) {
   return true;
 };
 
-let bills = [5, 10, 5, 5, 10, 20,5,5,5,10,20,50,20];
+let bills = [5, 5, 5, 20];
 
 console.log(shovelChange(bills));
