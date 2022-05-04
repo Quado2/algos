@@ -39,4 +39,4 @@ function lengthOfLongestSubstring(s) {
   return max
 }
 
-console.log(lengthOfLongestSubstring("adfajkjajfj"))
+console.log(lengthOfLongestSubstring("pwwkew"))
