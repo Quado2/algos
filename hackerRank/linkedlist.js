@@ -132,6 +132,19 @@ class LinkedList {
    current.next = node
 }
 
+reverseList(){
+  let current  = this.head;
+  let previous = null;
+  while(current){
+    const tempNext = current.next;
+    current.next = previous;
+    previous = current;
+    current = tempNext
+  }
+
+  this.head = previous
+}
+
 }
 
 const ll = new LinkedList();
@@ -139,45 +152,46 @@ ll.insertFirst(100);
 ll.insertFirst(200);
 ll.insertFirst("The first one");
 ll.insertAt(0, 400);
-//console.log(ll.head.data);
+ll.reverseList()
+console.log(ll.printListData());
 
-class NewLinked {
-  constructor() {
-    this.data = null;
-    this.next = null;
-    this.size = 0;
-  }
+// class NewLinked {
+//   constructor() {
+//     this.data = null;
+//     this.next = null;
+//     this.size = 0;
+//   }
 
-  insertLast(data) {
-    let node = new Node(data);
-    if (!this.data) {
-      this.data = data;
-      this.size++;
-      return;
-    }
-    if (this.size === 1) {
-      this.next = node;
-      this.size++
-    } else {
-       let current = this.next;
-       while(current.next){
-          current = current.next
-       }
-       current.next = node;
-       this.size++
-    }
-  }
+//   insertLast(data) {
+//     let node = new Node(data);
+//     if (!this.data) {
+//       this.data = data;
+//       this.size++;
+//       return;
+//     }
+//     if (this.size === 1) {
+//       this.next = node;
+//       this.size++
+//     } else {
+//        let current = this.next;
+//        while(current.next){
+//           current = current.next
+//        }
+//        current.next = node;
+//        this.size++
+//     }
+//   }
 
-  insertFirst(data) {
-    if (!this.data) {
-      this.data = data;
-    } else {
-      this.next = new Node(data);
-    }
-  }
-}
+//   insertFirst(data) {
+//     if (!this.data) {
+//       this.data = data;
+//     } else {
+//       this.next = new Node(data);
+//     }
+//   }
+// }
 
-const nl = new NewLinked();
+// const nl = new NewLinked();
 
 //console.log(nl);
 
@@ -229,45 +243,45 @@ const nl = new NewLinked();
 
 
 //solution to hackerank challenge
-function mergeLists(head1, head2) {
-   if(!head1) return head2
-   if(!head2) return head1
+// function mergeLists(head1, head2) {
+//    if(!head1) return head2
+//    if(!head2) return head1
 
-   let list1 = new LinkedList();
-   let list2 = new LinkedList();
-   let sortedList = new LinkedList();
-   list1.head = head1;
-   list2.head = head2;
+//    let list1 = new LinkedList();
+//    let list2 = new LinkedList();
+//    let sortedList = new LinkedList();
+//    list1.head = head1;
+//    list2.head = head2;
    
    
 
-   let current = list1.head;
-   let current2 = list2.head;
-   while(current || current2){
-       if(current && current2){
-           if(current.data > current2.data){
-               sortedList.insertLast(current2.data);
-           current2 = current2.next;
-           }else{
-               sortedList.insertLast(current.data);
-               current = current.next;
-           }
+//    let current = list1.head;
+//    let current2 = list2.head;
+//    while(current || current2){
+//        if(current && current2){
+//            if(current.data > current2.data){
+//                sortedList.insertLast(current2.data);
+//            current2 = current2.next;
+//            }else{
+//                sortedList.insertLast(current.data);
+//                current = current.next;
+//            }
            
-       }
-       if(!current){
-           sortedList.finish(current2)
-           break;
-       }
-       if(!current2){
-         sortedList.finish(current)
-         break;
-       }
+//        }
+//        if(!current){
+//            sortedList.finish(current2)
+//            break;
+//        }
+//        if(!current2){
+//          sortedList.finish(current)
+//          break;
+//        }
        
        
-   }
+//    }
    
-   return sortedList.head
+//    return sortedList.head
 
-}
+// }
 
 

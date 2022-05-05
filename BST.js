@@ -175,6 +175,25 @@ class BST {
 
     return result
   }
+
+
+  invertTree(){
+    const reverseNodes = (node) => {
+      if(node == null){
+        return
+      }
+
+      reverseNodes(node.left);
+      reverseNodes(node.right);
+
+      let hold = node.left;
+      node.left = node.right;
+      node.right = hold;
+    }
+    reverseNodes(this.root);
+  }
+  
+  
 }
 
 const bst = new BST(15)
@@ -186,4 +205,5 @@ bst.insert(12)
 bst.insert(28)
 bst.insert(39)
 
-console.log(bst.dfsPreOrder());
+bst.invertTree();
+console.log(bst.root);
