@@ -1,0 +1,25 @@
+Consider an array of size n with all initial values as 0.
+Perform the given ‘m’ add operations from index ‘a’ to ‘b’ 
+and evaluate the highest element in the array. An add operation 
+adds 100 to all elements from a to b (both inclusive). 
+
+Example:
+Input : n = 5 // We consider array {0, 0, 0, 0, 0}
+        m = 3.
+        a = 2, b = 4.
+        a = 1, b = 3.
+        a = 1, b = 2.
+Output : 300
+
+Explanation : 
+
+After I operation -
+A : 0 100 100 100 0
+
+After II operation -
+A : 100 200 200 100 0
+
+After III operation -
+A : 200 300 200 100 0
+
+Highest element : 300

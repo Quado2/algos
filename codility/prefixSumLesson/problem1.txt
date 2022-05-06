@@ -1,0 +1,6 @@
+Given an array arr[] of size n. 
+Given Q queries and in each query 
+given L and R, print sum of array elements from index L to R.
+
+ a = [ 3, 6, 2, 8, 9, 2 ];
+ q =[ [ 2, 3 ],[ 4, 6 ],[ 1, 5 ],[ 3, 6  ]];
