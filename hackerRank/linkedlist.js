@@ -23,7 +23,6 @@ class LinkedList {
     let current;
 
     //if empty, make the head;
-
     if (!this.head) {
       this.head = node;
     } else {
