@@ -35,7 +35,7 @@ numbers is sorted in non-decreasing order.
 The tests are generated such that there is exactly one solution.
 */
 
-function twoSum(numbers: number[], target: number): number[] {
+function twoSum2(numbers: number[], target: number): number[] {
   let i = 0;
   let j = numbers.length - 1;
   let solArr: number[] = [];
