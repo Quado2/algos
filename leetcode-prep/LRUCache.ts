@@ -1,4 +1,4 @@
-class DLNode {
+export class DLNode {
   key;
   val;
   next: DLNode | null;
