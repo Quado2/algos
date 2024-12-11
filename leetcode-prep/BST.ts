@@ -155,48 +155,51 @@ class BST {
     const queue = new Queue<TreeNode>();
     const result: number[] = [];
     queue.enqueue(this.head as TreeNode);
-    while(queue.count){
+    while (queue.count) {
       const node = queue.dequeue() as TreeNode;
       result.push(node.val);
-      if(node.left)queue.enqueue(node.left)
-      if(node.right) queue.enqueue(node.right)
+      if (node.left) queue.enqueue(node.left);
+      if (node.right) queue.enqueue(node.right);
     }
 
-    return result
+    return result;
   }
 
-  remove(val:number){
-    const removeNode = (head:TreeNode | null, val: number):TreeNode | null => {
-      if(!head) return head;
+  remove(val: number) {
+    const removeNode = (
+      head: TreeNode | null,
+      val: number
+    ): TreeNode | null => {
+      if (!head) return head;
 
-      if(val < head.val){
+      if (val < head.val) {
         head.left = removeNode(head.left, val);
-      } else if(val > head.val) {
+      } else if (val > head.val) {
         head.right = removeNode(head.right, val);
-      }else {
+      } else {
         //We have found the node of interest
-        if(!head.right && !head.left) return null
-        
-        if(!head.right) return head.left
-        if(!head.left) return head.right
-        
+        if (!head.right && !head.left) return null;
+
+        if (!head.right) return head.left;
+        if (!head.left) return head.right;
+
         //on the right node, find the min value. This will be the left most value on the right node
         let tempNode = head.right;
-        while(tempNode.left) {
-          tempNode = tempNode.left
+        while (tempNode.left) {
+          tempNode = tempNode.left;
         }
         head.val = tempNode.val;
         head.right = removeNode(head.right, tempNode.val);
       }
       return head;
-    }
+    };
 
-    this.head = removeNode(this.head!, val)
+    this.head = removeNode(this.head!, val);
   }
 
-  invert(){
-    const reverseNode =(node:TreeNode|null) => {
-      if(!node) return null
+  invert() {
+    const reverseNode = (node: TreeNode | null) => {
+      if (!node) return null;
 
       const temp = node.left;
       node.left = node.right;
@@ -204,12 +207,80 @@ class BST {
 
       reverseNode(node.left);
       reverseNode(node.right);
+    };
+
+    reverseNode(this.head);
+  }
+
+  maxDepth(): number {
+    const findMax = (node: TreeNode | null): number => {
+      if (!node) return 0;
+      return 1 + Math.max(findMax(node.left), findMax(node.right));
+    };
+
+    return findMax(this.head);
+  }
+
+  maxDepthWithBfs(): number {
+    let depthCount = 0;
+    if (!this.head) return 0;
+    const queue = new Queue<TreeNode>();
+    queue.enqueue(this.head);
+    while (queue.count) {
+      const queueSize = queue.count;
+      for (let i = 0; i < queueSize; i++) {
+        const node = queue.dequeue() as TreeNode;
+        if (node.left) queue.enqueue(node.left);
+        if (node.right) queue.enqueue(node.right);
+      }
+      depthCount++;
     }
 
-    reverseNode(this.head)
+    return depthCount;
+  }
+
+  maxDepthIterativeDfs(): number {
+    const stack: [TreeNode | null, number][] = [[this.head, 1]];
+    let res = 0;
+    while (stack.length) {
+      const [node, level] = stack.pop() || [];
+      if (node) {
+        res = Math.max(res, level || 0);
+        stack.push([node.left, (level || 0) + 1]);
+        stack.push([node.right, (level || 0) + 1]);
+      }
+    }
+
+    return res;
+  }
+
+  static isSameTree(tree1: TreeNode | null, tree2: TreeNode | null): boolean {
+    if (!tree1 && !tree2) return true;
+    if (!tree1 || !tree2) return false;
+    if (tree1.val !== tree2.val) return false;
+
+    return (
+      BST.isSameTree(tree1.right!, tree2.right!) &&
+      BST.isSameTree(tree1.left!, tree2.left!)
+    );
+  }
+
+  isSymmetric(): boolean {
+    if (!this.head) return true;
+    const dfs = (right: TreeNode | null, left: TreeNode | null): boolean => {
+      if (!right && !left) return true;
+      if (!right || !left) return false;
+
+      return (
+        right.val === left.val &&
+        dfs(right.right, left.left) &&
+        dfs(right.left, left.right)
+      );
+    };
+
+    return dfs(this.head!.right, this.head!.left);
   }
 }
-
 
 const bst = new BST();
 bst.insert(6);
@@ -231,8 +302,35 @@ bst.insert(9);
 // console.log(bst.dfsInorder());
 // console.log(bst.dfsPreOrder());
 // console.log(bst.dfsPostOrder());
-console.log(bst.bfs())
-console.log(bst.remove(6))
-console.log(bst.bfs())
-console.log(bst.invert())
-console.log(bst.bfs())
+// console.log(bst.bfs());
+// console.log(bst.remove(6));
+// console.log(bst.bfs());
+// console.log(bst.invert());
+// console.log(bst.bfs());
+// console.log(bst.maxDepth());
+// console.log(bst.maxDepthWithBfs());
+// console.log(bst.maxDepthIterativeDfs());
+
+const bst1 = new BST();
+bst1.insert(5);
+bst1.insert(4);
+bst1.insert(3);
+bst1.insert(2);
+bst1.insert(6);
+
+const bst2 = new BST();
+bst2.insert(5);
+bst2.insert(4);
+bst2.insert(3);
+bst2.insert(2);
+bst2.insert(6);
+
+const bst3 = new BST();
+bst3.insert(5);
+bst3.insert(4);
+bst3.insert(3);
+bst3.insert(2);
+bst3.insert(8);
+
+console.log(BST.isSameTree(bst1.head, bst2.head));
+console.log(BST.isSameTree(bst1.head, bst3.head));
