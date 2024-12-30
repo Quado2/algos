@@ -43,13 +43,15 @@ class Queue<T> {
   }
 }
 
-class GNode {
+export class GNode {
   val: number | string;
   adjacentList: GNode[];
+  color: string | null;
 
   constructor(val: number | string) {
     this.val = val;
     this.adjacentList = [];
+    this.color = null;
   }
 
   connect(node: GNode, bidirectional = true) {
@@ -229,11 +231,11 @@ const graph = new Graph([nodeE, nodeA, nodeB, nodeC, nodeD, nodeF]);
 
 // console.log(graph.dfs(nodeA));
 
-nodeA.connect(nodeB, false);
-nodeA.connect(nodeC, false);
-nodeB.connect(nodeD, false);
-nodeD.connect(nodeF,false);
-nodeE.connect(nodeC, false);
-nodeE.connect(nodeF, false);
+// nodeA.connect(nodeB, false);
+// nodeA.connect(nodeC, false);
+// nodeB.connect(nodeD, false);
+// nodeD.connect(nodeF,false);
+// nodeE.connect(nodeC, false);
+// nodeE.connect(nodeF, false);
 
-console.log(graph.topologicalSort())
+// console.log(graph.topologicalSort())
