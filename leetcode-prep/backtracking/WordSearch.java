@@ -37,25 +37,28 @@ board and word consists of only lowercase and uppercase English letters.
 
 
 class Solution {
-  boolean isFound = false;
   int[][] navigations = {{0,1}, {0, -1}, {1,0}, {-1, 0}};
   int rowSize = 0;
   int colSize = 0;
 
-  public void backTrack(int r, int c, char[][] board, String word, int wordIndex, boolean[][] visited) {
+  public boolean backTrack(int r, int c, char[][] board, String word, int wordIndex, boolean[][] visited) {
     if((r >= this.rowSize) || (r < 0) || (c >= this.colSize) || (c < 0) || (visited[r][c]) || word.charAt(wordIndex) != board[r][c]) {
-      return;
+      return false;
     }
 
     if(wordIndex == (word.length()-1)){
-      this.isFound = true;
-      return;
+      return true;
     }
+
+
     visited[r][c] = true;
+    boolean res = false;
     for(int[] nav: navigations){
-      backTrack(r+nav[0], c+nav[1], board, word, wordIndex+1, visited);
+     res = res || backTrack(r+nav[0], c+nav[1], board, word, wordIndex+1, visited);
     }
     visited[r][c] = false;
+
+    return res;
     
   }
 
@@ -64,15 +67,14 @@ class Solution {
       int col = board[0].length;
       this.rowSize = row;
       this.colSize = col;
-      this.isFound = false;
 
       for(int i = 0; i < row; i++) {
         for(int j = 0; j < col ; j++) {
-          backTrack(i, j, board, word,0, new boolean[row][col]);
+         if(backTrack(i, j, board, word,0, new boolean[row][col]))  return true;
         }
       }
 
-      return this.isFound;
+      return false;
   }
 }
 
