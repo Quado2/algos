@@ -66,7 +66,7 @@ class Solution {
 
 public class WordSearch2 {
   public static void main(String[] args) {
-    System.out.println("Hellow")
+    System.out.println("Hellow");
 
     String[][] board = {
       {"o", "a", "a", "n"},
